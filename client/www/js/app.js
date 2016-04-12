@@ -29,19 +29,33 @@ angular.module('amblr',
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
+  .state('tabs', {
+      url: '/tab',
+      abstract: true,
+      templateUrl: 'templates/tabs.html'
+  })
+  .state('tabs.home', {
+    url: "/home",
+    views: {
+      'home-tab': {
+        templateUrl: "templates/map.html",
+        controller: 'MapCtrl'
+      }
+    }
+  })
   //to delete after testing.  use for data point entry
   .state('dataEntry', {
     url: '/test',
     templateUrl: 'testIndex.html',
     controller: 'testCtrl'
   })
-  .state('map', {
-    url: '/',
-    templateUrl: 'templates/map.html',
-    controller: 'MapCtrl'
-  });
+  // .state('map', {
+  //   url: '/',
+  //   templateUrl: 'templates/map.html',
+  //   controller: 'MapCtrl'
+  // });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/tab/home');
 
 });
 

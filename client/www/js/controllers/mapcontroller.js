@@ -1,7 +1,7 @@
 angular.module('amblr.map', [])
 
-.controller('MapCtrl', function($scope, $state, $cordovaGeolocation, POIs) {
-  var options = {timeout: 10000, enableHighAccuracy: true};
+.controller('MapCtrl', function($scope, $state, $cordovaGeolocation, POIs, $window) {
+  var options = {timeout: 1000, enableHighAccuracy: true};
 
   $scope.POIs = [];
   // $scope.currentPOI = null;
@@ -17,6 +17,8 @@ angular.module('amblr.map', [])
 
   $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
     console.log(position.coords.latitude, position.coords.longitude);
+
+    var elem = $window.document.getElementById('map');
 
     var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     $scope.currentpos = latLng;
